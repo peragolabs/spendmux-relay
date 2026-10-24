@@ -40,7 +40,7 @@ export function sealPage({ kid, spki, nonce }) {
   const options = PROVIDERS.map(([id, name]) => `<option value="${esc(id)}">${esc(name)}</option>`).join('')
   return `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Seal a provider key</title>
+<title>Seal a provider key</title><link rel="icon" href="data:,">
 <style nonce="${esc(nonce)}">
 body{font:15px/1.5 system-ui,sans-serif;max-width:640px;margin:40px auto;padding:0 16px;color:#1a1a1a;background:#fff}
 @media (prefers-color-scheme:dark){body{color:#eee;background:#141414}input,select,textarea{background:#1f1f1f;color:#eee;border-color:#444}}
@@ -59,6 +59,9 @@ textarea{font:12px/1.4 ui-monospace,monospace;height:140px}button{margin-top:20p
 <label for="out">Envelope</label><textarea id="out" readonly></textarea>
 <p class="note" id="status"></p>
 <script nonce="${esc(nonce)}">
+// Wrangler bundles with esbuild's keepNames, which rewrites sealKey's source to
+// call a __name helper that exists only in the Worker bundle. Define it here.
+const __name = (f) => f;
 const PROVIDERS = ${JSON.stringify(PROVIDERS)};
 const SPKI = ${JSON.stringify(spki)};
 const KID = ${JSON.stringify(kid)};

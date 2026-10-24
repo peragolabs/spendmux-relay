@@ -252,7 +252,7 @@ async function sealResponse(env) {
   return new Response(sealPage({ kid, spki, nonce }), {
     headers: {
       'content-type': 'text/html; charset=utf-8',
-      'content-security-policy': `default-src 'none'; script-src 'nonce-${nonce}'; style-src 'nonce-${nonce}'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'`,
+      'content-security-policy': `default-src 'none'; img-src data:; script-src 'nonce-${nonce}'; style-src 'nonce-${nonce}'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'`,
       'referrer-policy': 'no-referrer',
       'x-content-type-options': 'nosniff',
       'cache-control': 'no-store',

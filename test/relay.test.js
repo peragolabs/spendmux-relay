@@ -130,3 +130,18 @@ test('the seal page carries only the public key and locks down scripts', async (
   assert.ok(html.includes('async function sealKey'))
   assert.ok(sealPage({ kid: 'k', spki: 's', nonce: 'n' }).includes('nonce="n"'))
 })
+
+test('the embedded sealKey still runs after wrangler adds __name calls', async () => {
+  const html = sealPage({ kid: 'k', spki: 's', nonce: 'n' })
+  const script = html.slice(html.indexOf('<script nonce="n">') + 18, html.indexOf('</script>'))
+  const shim = script.slice(0, script.indexOf('const PROVIDERS'))
+  // What esbuild --keep-names does to the inner arrow function.
+  const bundled = sealKey.toString().replace(
+    'const b64 = (b) => btoa(String.fromCharCode(...new Uint8Array(b)))',
+    'const b64 = /* @__PURE__ */ __name((b) => btoa(String.fromCharCode(...new Uint8Array(b))), "b64")')
+  assert.ok(bundled.includes('__name('))
+  const { publicKey } = generateKeyPairSync('rsa', { modulusLength: 2048 })
+  const spki = publicKey.export({ type: 'spki', format: 'der' }).toString('base64')
+  const run = new Function(`${shim}\n${bundled}\nreturn sealKey`)()
+  assert.equal(JSON.parse(await run(spki, 'k', { provider: 'openai' }, 'sk-x')).kid, 'k')
+})
