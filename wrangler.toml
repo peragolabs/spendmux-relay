@@ -1,0 +1,16 @@
+name = "spendmux-relay"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+workers_dev = true
+
+[vars]
+# Requests per UTC day this relay will forward. 0 turns the cap off.
+DAILY_REQUEST_LIMIT = "10000"
+
+[[durable_objects.bindings]]
+name = "RELAY_COUNTER"
+class_name = "RelayCounter"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["RelayCounter"]

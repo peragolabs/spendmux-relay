@@ -1,0 +1,11 @@
+{
+  "name": "spendmux-relay",
+  "private": true,
+  "type": "module",
+  "description": "Customer-run key relay for SpendMux. No runtime dependencies.",
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "keygen": "node scripts/keygen.mjs",
+    "deploy": "wrangler deploy"
+  }
+}

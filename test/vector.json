@@ -1,0 +1,10 @@
+{
+  "account": "acct-1",
+  "body": "{\"model\":\"gpt-4o-mini\",\"messages\":[{\"role\":\"user\",\"content\":\"hi\"}]}",
+  "envelope": "eyJ2IjoxLCJhbGciOiJSU0EtT0FFUC0yNTYrQTI1NkdDTSIsImtpZCI6IjAxMjM0NTY3ODlhYmNkZWYiLCJtZXRhIjoie1wicHJvdmlkZXJcIjpcIm9wZW5haVwiLFwiYmFzZV91cmxcIjpcImh0dHBzOi8vYXBpLm9wZW5haS5jb20vdjFcIixcImF1dGhcIjpcImJlYXJlclwiLFwiaGludFwiOlwi4oCmYWJjZFwifSIsIndrIjoiZDJzPSIsIml2IjoiYVhZPSIsImN0IjoiWTNRPSJ9",
+  "method": "POST",
+  "public_key": "6kpsY+KcUgq+9VB7Ey7F+ZVHdq6+vnuSQh7qaRRG0iw=",
+  "signature": "IfxpB7TOYXMNZ/+d6V6SjHoxYxC9YHjHaZHwfGKT70dgiwzo0gM6YfUSLuJElPG0FX7LFMIhB584WwhCHTpmBw==",
+  "target": "https://api.openai.com/v1/chat/completions",
+  "timestamp": "1792800000"
+}
